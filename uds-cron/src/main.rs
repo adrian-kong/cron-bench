@@ -8,6 +8,7 @@ async fn main() -> io::Result<()> {
     let sched_iter = schedule.upcoming(Utc);
     #[cfg(unix)]
     {
+        println!("running ");
         use tokio::net::UnixListener;
         use std::time::Duration;
 
@@ -25,11 +26,12 @@ async fn main() -> io::Result<()> {
                         }
                     }
                 },
-                _ = tokio::time::sleep(Duration::from_secs(60)) => {
+                _ = tokio::time::sleep(Duration::from_secs(10)) => {
                     break;
                 }
             }
         }
     }
+    println!("stopped ");
     Ok(())
 }
