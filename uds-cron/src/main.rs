@@ -4,7 +4,7 @@ use chrono::Utc;
 
 #[tokio::main]
 async fn main() -> io::Result<()> {
-    let schedule = cron::Schedule::from_str("* * * * *").unwrap();
+    let schedule = cron::Schedule::from_str("* * * * * * *").unwrap();
     let sched_iter = schedule.upcoming(Utc);
     #[cfg(unix)]
     {
