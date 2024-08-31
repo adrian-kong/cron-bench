@@ -1,7 +1,7 @@
+use core::time::Duration;
 use std::io;
 use std::str::FromStr;
 use std::sync::Arc;
-use std::time::Duration;
 use chrono::Utc;
 use tokio::sync::Notify;
 
@@ -14,8 +14,7 @@ async fn main() -> io::Result<()> {
     tokio::spawn(async move {
         tokio::time::sleep(Duration::from_secs(5)).await;
         notify_clone.notify_waiters();
-    });
-
+    }).await?;
     #[cfg(unix)]
     {
         use tokio::net::UnixListener;
@@ -42,6 +41,5 @@ async fn main() -> io::Result<()> {
             }
         }
     }
-    println!("stopped ");
     Ok(())
 }
